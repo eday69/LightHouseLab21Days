@@ -1,0 +1,8 @@
+function gridSize() {
+  
+  var Y = GRID.length;
+  var X = GRID[0].length;
+  
+  return (X.toString() + " x " + Y.toString());
+}
+

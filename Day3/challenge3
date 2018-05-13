@@ -1,0 +1,21 @@
+function gridSize() {
+  
+  var Y = GRID.length;
+  var X = GRID[0].length;
+  
+  return (X.toString() + " x " + Y.toString());
+}
+
+function totalCells() {
+  var Y = GRID.length;
+  var X = GRID[0].length;
+ 
+  return X*Y;  
+}
+
+function lightCell(position) {
+  var col = position.charCodeAt(0)-65;
+  var row = parseInt(position.substring(1))-1;
+  return GRID[row][col];
+}
+
