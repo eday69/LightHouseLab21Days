@@ -1,0 +1,34 @@
+// Day 1
+function gridSize() {
+  
+  var Y = GRID.length;
+  var X = GRID[0].length;
+  
+  return (X.toString() + " x " + Y.toString());
+}
+
+// Day 2
+function totalCells() {
+  var Y = GRID.length;
+  var X = GRID[0].length;
+ 
+  return X*Y;  
+}
+
+// Day 3
+function lightCell(position) {
+  var col = position.charCodeAt(0)-65;
+  var row = parseInt(position.substring(1))-1;
+  return GRID[row][col];
+}
+
+// Day 4
+function isRock(cell) {
+  return (lightCell(cell) == "^")?true:false; 
+}
+
+// Day 5
+function isCurrent(cell) {
+  return (lightCell(cell) == "~"); 
+}
+
