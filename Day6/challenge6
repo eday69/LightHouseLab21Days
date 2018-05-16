@@ -22,3 +22,18 @@ function lightCell(position) {
   return GRID[row][col];
 }
 
+// Day 4
+function isRock(cell) {
+  return (lightCell(cell) == "^")?true:false; 
+}
+
+// Day 5
+function isCurrent(cell) {
+  return (lightCell(cell) == "~"); 
+}
+
+// Day 6
+function lightRow(rownum) {
+  return GRID[rownum-1]; 
+}
+
