@@ -1,0 +1,63 @@
+// Day 1
+function gridSize() {
+  
+  var Y = GRID.length;
+  var X = GRID[0].length;
+  
+  return (X.toString() + " x " + Y.toString());
+}
+
+// Day 2
+function totalCells() {
+  var Y = GRID.length;
+  var X = GRID[0].length;
+ 
+  return X*Y;  
+}
+
+// Day 3
+/*
+function lightCell(position) {
+  var col = position.charCodeAt(0)-65;
+  var row = parseInt(position.substring(1))-1;
+  return GRID[row][col];
+}
+*/
+
+// Day 4
+function isRock(cell) {
+  return (lightCell(cell) == "^"); 
+}
+
+// Day 5
+function isCurrent(cell) {
+  return (lightCell(cell) == "~"); 
+}
+
+// Day 6
+function lightRow(rownum) {
+  return GRID[rownum-1]; 
+}
+
+// Day 7
+function lightColumn(wcol) {
+  var colContent = [];
+  for (i=1; i<=GRID.length; i++) {
+    colContent.push(lightCell(String(wcol+i)));
+  }
+  return colContent;
+}
+
+// Day 8
+function lightCell(position) {
+  var col = position.charCodeAt(0)-65;
+  var row = parseInt(position.substring(1))-1;
+  
+  if (row < GRID.length) {
+    if (col < GRID[row].length) {
+      return GRID[row][col];
+    }
+  }
+  return false;
+}
+
