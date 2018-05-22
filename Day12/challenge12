@@ -1,0 +1,107 @@
+// Day 1
+function gridSize() {
+  
+  var Y = GRID.length;
+  var X = GRID[0].length;
+  
+  return (X.toString() + " x " + Y.toString());
+}
+
+// Day 2
+function totalCells() {
+  var Y = GRID.length;
+  var X = GRID[0].length;
+ 
+  return X*Y;  
+}
+
+// Day 3
+/*
+function lightCell(position) {
+  var col = position.charCodeAt(0)-65;
+  var row = parseInt(position.substring(1))-1;
+  return GRID[row][col];
+}
+*/
+
+// Day 4
+function isRock(cell) {
+  return (lightCell(cell) == "^"); 
+}
+
+// Day 5
+function isCurrent(cell) {
+  return (lightCell(cell) == "~"); 
+}
+
+// Day 6
+function lightRow(rownum) {
+  return GRID[rownum-1]; 
+}
+
+// Day 7
+function lightColumn(wcol) {
+  var colContent = [];
+  for (i=1; i<=GRID.length; i++) {
+    colContent.push(lightCell(String(wcol+i)));
+  }
+  return colContent;
+}
+
+// Day 8
+function lightCell(position) {
+  var col = position.charCodeAt(0)-65;
+  var row = parseInt(position.substring(1))-1;
+  
+  if (row < GRID.length) {
+    if (col < GRID[row].length) {
+      return GRID[row][col];
+    }
+  }
+  return false;
+}
+
+// Day 9
+function isSafe(cell) {
+  return !(isRock(cell) || isCurrent(cell));
+}
+
+// Day 10
+function allRocks() {
+  var rocks = [];
+  var position = "";
+  for (var i=1; i<=GRID.length; i++) {
+    for (var j=65; j<(65+GRID[0].length); j++) {
+      position=String.fromCharCode(j)+i.toString();
+      if (isRock(position))
+        rocks.push(position);
+    }
+  }  
+  return rocks;
+}
+
+// Day 11
+function allCurrents() {
+  var currents = [];
+  var position = "";
+  for (var i=1; i<=GRID.length; i++) {
+    for (var j=65; j<(65+GRID[0].length); j++) {
+      position=String.fromCharCode(j)+i.toString();
+      if (isCurrent(position))
+        currents.push(position);
+    }
+  }  
+  return currents;
+}
+
+// Day 12
+function firstRock() {
+  var position = "";
+  for (var i=1; i<=GRID.length; i++) {
+    for (var j=65; j<(65+GRID[0].length); j++) {
+      position=String.fromCharCode(j)+i.toString();
+      if (isRock(position))
+        return position;
+    }
+  }  
+}
