@@ -1,0 +1,223 @@
+// Day 1
+function gridSize() {
+  
+  var Y = GRID.length;
+  var X = GRID[0].length;
+  
+  return (X.toString() + " x " + Y.toString());
+}
+
+// Day 2
+function totalCells() {
+  var Y = GRID.length;
+  var X = GRID[0].length;
+ 
+  return X*Y;  
+}
+
+// Day 3
+/*
+function lightCell(position) {
+  var col = position.charCodeAt(0)-65;
+  var row = parseInt(position.substring(1))-1;
+  return GRID[row][col];
+}
+*/
+
+// Day 4
+function isRock(cell) {
+  return (lightCell(cell) == "^"); 
+}
+
+// Day 5
+function isCurrent(cell) {
+  return (lightCell(cell) == "~"); 
+}
+
+// Day 6
+function lightRow(rownum) {
+  return GRID[rownum-1]; 
+}
+
+// Day 7
+function lightColumn(wcol) {
+  var colContent = [];
+  for (i=1; i<=GRID.length; i++) {
+    colContent.push(lightCell(String(wcol+i)));
+  }
+  return colContent;
+}
+
+// Day 8
+function lightCell(position) {
+  var col = position.charCodeAt(0)-65;
+  var row = parseInt(position.substring(1))-1;
+  
+  if (row < GRID.length) {
+    if (col < GRID[row].length) {
+      return GRID[row][col];
+    }
+  }
+  return false;
+}
+
+// Day 9
+function isSafe(cell) {
+  return !(isRock(cell) || isCurrent(cell));
+}
+
+// Day 10
+function allRocks() {
+  var rocks = [];
+  var position = "";
+  for (var i=1; i<=GRID.length; i++) {
+    for (var j=65; j<(65+GRID[0].length); j++) {
+      position=String.fromCharCode(j)+i.toString();
+      if (isRock(position))
+        rocks.push(position);
+    }
+  }  
+  return rocks;
+}
+
+// Day 11
+function allCurrents() {
+  var currents = [];
+  var position = "";
+  for (var i=1; i<=GRID.length; i++) {
+    for (var j=65; j<(65+GRID[0].length); j++) {
+      position=String.fromCharCode(j)+i.toString();
+      if (isCurrent(position))
+        currents.push(position);
+    }
+  }  
+  return currents;
+}
+
+// Day 12
+function firstRock() {
+  var position = "";
+  for (var i=1; i<=GRID.length; i++) {
+    for (var j=65; j<(65+GRID[0].length); j++) {
+      position=String.fromCharCode(j)+i.toString();
+      if (isRock(position))
+        return position;
+    }
+  }  
+}
+
+// Day 13
+function firstCurrent() {
+  var position = "";
+  for (var i=1; i<=GRID.length; i++) {
+    for (var j=65; j<(65+GRID[0].length); j++) {
+      position=String.fromCharCode(j)+i.toString();
+      if (isCurrent(position))
+        return position;
+    }
+  }  
+}
+
+
+// Day 14
+function isDangerous(position) {
+  var col = position.charCodeAt(0)-65;
+  var row = parseInt(position.substring(1))-1;
+
+  // In it
+  if (!isSafe(position)) {
+    return false;
+  }
+  var testcol=col-1;  // left
+  if (testcol >= 0) {
+    if (!isSafe(String.fromCharCode(testcol+65)+(row+1).toString())) {
+      return false;
+    }
+  }
+  testcol=col+1;  // right
+  if (testcol < GRID[0].length) {
+    if (!isSafe(String.fromCharCode(testcol+65)+(row+1).toString())) {
+      return false;
+    }
+  }
+  var testrow=row-1; // above
+  if (row >= 0) {
+    if (!isSafe(String.fromCharCode(col+65)+(row+1).toString())) {
+      return false;
+    }
+  }  
+  testrow=row+1; // bellow
+  if (row < GRID.length) {
+    if (!isSafe(String.fromCharCode(col+65)+(row+1).toString())) {
+      return false;
+    }
+  }  
+  
+  return true;
+}
+
+// Day 15
+function distressBeacon(position) {
+  var col = position.charCodeAt(0)-65;
+  var row = parseInt(position.substring(1))-1;
+  var newpos="";
+
+  // left
+  var testcol=col-1;  // left
+  if (testcol >= 0) {
+    newpos=String.fromCharCode(testcol+65)+(row+1).toString();
+    if (isDangerous(newpos)) {
+      return newpos; 
+    }
+  }
+  // right
+  testcol=col+1;  // right
+  if (testcol < GRID[0].length) {
+    newpos=String.fromCharCode(testcol+65)+(row+1).toString()
+    if (isDangerous(newpos)) {
+      return newpos; 
+    }
+  }
+  // above
+  var testrow=row-1;  // above
+  if (testrow >= 0) {
+    newpos=String.fromCharCode(col+65)+(testrow+1).toString()
+    if (isDangerous(newpos)) {
+      return newpos; 
+    }
+  }
+
+  // below
+  var testrow=row+11;  // below
+  if (testrow < GRID.length) {
+    newpos=String.fromCharCode(col+65)+(testrow+1).toString()
+    if (isDangerous(newpos)) {
+      return newpos; 
+    }
+  }
+
+}
+
+// Day 16
+function addRock(position) {
+  var col = position.charCodeAt(0)-65;
+  var row = parseInt(position.substring(1))-1;
+  GRID[row][col]="^";
+}
+
+addRock('J9');
+
+// Day 17
+function percentageReport() {
+  var report = [];
+  
+  var rocks=allRocks();
+  var currents=allCurrents();
+  var cells=totalCells();
+
+  report.push(((rocks.length / cells)*100).toFixed(2));
+  report.push(((currents.length / cells)*100).toFixed(2));
+  
+  return report;
+}
+
